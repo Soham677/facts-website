@@ -13,8 +13,9 @@
 <script src="https://www.gstatic.com/firebasejs/9.5.0/firebase-database.js"></script>
   </head>
   <body>
-    <div class="g-signin2" onclick="setInfo()" data-onsuccess="onSignIn" data-theme="dark" data-redirect-uri="https://soham677.github.io"></div>
-    <script>      
+    <div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark" data-redirect-uri="https://soham677.github.io"></div>
+    <script>     
+
 function onSignIn(googleUser) {
         // Useful data for your client-side scripts:
         var profile = googleUser.getBasicProfile();
@@ -31,13 +32,7 @@ function onSignIn(googleUser) {
         var id_token = googleUser.getAuthResponse().id_token;
         console.log("ID Token: " + id_token);
          
-            
-      } then({
-        setInfo()
-      })    
-      
-    function setInfo() {
-      const firebaseConfig = {
+        const firebaseConfig = {
     apiKey: "AIzaSyDYNIFVoYIShkDQ_3HEgeFhsolI3795ieI",
     authDomain: "fact-website.firebaseapp.com",
     databaseURL: "https://fact-website-default-rtdb.asia-southeast1.firebasedatabase.app",
@@ -56,8 +51,7 @@ function onSignIn(googleUser) {
     profilePicture: profile.getImageUrl(),
     email: profile.getEmail(),    
   })
-    }  
-       
+    }        
 
     </script>
   </body>
