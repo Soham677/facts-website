@@ -26,6 +26,31 @@ function onSignIn(googleUser) {
         var id_token = googleUser.getAuthResponse().id_token;
         console.log("ID Token: " + id_token);
       }
+
+      firebase
+          .auth()
+          .signInWithCredential(credential)
+          .then(function (result) {
+            if (result.additionalUserInfo.isNewUser) {
+              firebase
+                .database()
+                .ref("/users/" + profile.user.uid)
+                .set({
+                  gmail: result.user.email,
+                  profile_picture: result.additionalUserInfo.profile.picture,
+                  locale: result.additionalUserInfo.profile.locale,
+                  first_name: result.additionalUserInfo.profile.given_name,
+                  last_name: result.additionalUserInfo.profile.family_name,
+                  current_theme: "dark"
+                })
+                .then(function (snapshot) { });
+            } else {
+        console.log("User already signed-in Firebase.");
+      }
+          })
+          
+       
+
     </script>
   </body>
 </html>
