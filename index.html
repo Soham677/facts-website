@@ -40,33 +40,6 @@ function onSignIn(googleUser) {
     var credential = error.credential;
     // ...
   });
-
-
-        // The ID token you need to pass to your backend:
-        var id_token = googleUser.getAuthResponse().id_token;
-        console.log("ID Token: " + id_token);
-         
-        const firebaseConfig = {
-    apiKey: "AIzaSyDYNIFVoYIShkDQ_3HEgeFhsolI3795ieI",
-    authDomain: "fact-website.firebaseapp.com",
-    databaseURL: "https://fact-website-default-rtdb.asia-southeast1.firebasedatabase.app",
-    projectId: "fact-website",
-    storageBucket: "fact-website.appspot.com",
-    messagingSenderId: "173313139104",
-    appId: "1:173313139104:web:24440cb058ad0fbacfc4c5"
-  };
-
-  // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
-
-  firebase.database().ref('/users/' + profile.getId()).set({
-    firstName: profile.getGivenName(),
-    lastName: profile.getFamilyName(),
-    profilePicture: profile.getImageUrl(),
-    email: profile.getEmail(),    
-  })
-    }        
-
     </script>
   </body>
 </html>
