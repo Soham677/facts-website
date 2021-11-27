@@ -16,31 +16,7 @@
     <div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark" data-redirect-uri="https://soham677.github.io"></div>
     <script>     
 
-function onSignIn(googleUser) {
-        // Useful data for your client-side scripts:
-        var provider = new firebase.auth.GoogleAuthProvider();
-        firebase.auth()
-  .signInWithPopup(provider)
-  .then((result) => {
-    /** @type {firebase.auth.OAuthCredential} */
-    var credential = result.credential;
-
-    // This gives you a Google Access Token. You can use it to access the Google API.
-    var token = credential.accessToken;
-    // The signed-in user info.
-    var user = result.user;
-    // ...
-  }).catch((error) => {
-    // Handle Errors here.
-    var errorCode = error.code;
-    var errorMessage = error.message;
-    // The email of the user's account used.
-    var email = error.email;
-    // The firebase.auth.AuthCredential type that was used.
-    var credential = error.credential;
-    // ...
-  });
-  
+function onSignIn(googleUser) {  
   // Step 1.
 // User tries to sign in to Google.
 auth.signInWithPopup(new firebase.auth.GoogleAuthProvider()).catch(function(error) {
