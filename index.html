@@ -14,7 +14,6 @@
   </head>
   <body>
     <div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark" data-redirect-uri="https://soham677.github.io"></div>
-    <button onclick="change()">Click me</button>
     <script>     
 
 function onSignIn(googleUser) {
@@ -59,16 +58,7 @@ function onSignIn(googleUser) {
     var credential = error.credential;
   });
 
-}
-
-function change() {
-        // The ID token you need to pass to your backend:
-  firebase.database().ref('users/' + uid).set({
-    username: "soham",
-    email: "wdwfd",
-  });
-
-}
+}}
 
     </script>
   </body>
