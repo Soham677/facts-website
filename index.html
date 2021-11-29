@@ -42,7 +42,7 @@ function onSignIn(googleUser) {
   };
   firebase.initializeApp(firebaseConfig);
 
-   export default firebase.database();
+   var database = firebase.database();
 
   console.log(result.user.email);
 
