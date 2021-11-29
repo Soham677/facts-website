@@ -29,6 +29,7 @@ function onSignIn(googleUser) {
     var token = credential.accessToken;
     // The signed-in user info.
     var user = result.user;
+
     const firebaseConfig = {
     apiKey: "AIzaSyDYNIFVoYIShkDQ_3HEgeFhsolI3795ieI",
     authDomain: "fact-website.firebaseapp.com",
@@ -38,8 +39,10 @@ function onSignIn(googleUser) {
     messagingSenderId: "173313139104",
     appId: "1:173313139104:web:24440cb058ad0fbacfc4c5"
   };
-  const app = initializeApp(firebaseConfig);
-  var database = firebase.database();
+  firebase.initializeApp(firebaseConfig);
+
+   export default firebase.database();
+
 
   firebase.database().ref('/users/' + result.user.uid).set({
     gmail: result.user.email,
@@ -57,9 +60,7 @@ function onSignIn(googleUser) {
     // The firebase.auth.AuthCredential type that was used.
     var credential = error.credential;
   });
-
-}}
-
+}
     </script>
   </body>
 </html>
