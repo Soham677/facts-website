@@ -14,36 +14,62 @@
   </head>
   <body>
     <div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark" data-redirect-uri="https://soham677.github.io"></div>
+    <button onclick="change()">Click me</button>
     <script>     
 
- 
- function onSignIn(googleUser) {
-  console.log('Google Auth Response', googleUser);
-  // We need to register an Observer on Firebase Auth to make sure auth is initialized.
-  var unsubscribe = firebase.auth().onAuthStateChanged((firebaseUser) => {
-    unsubscribe();
-    // Check if we are already signed-in Firebase with the correct user.
-    if (!isUserEqual(googleUser, firebaseUser)) {
-      // Build Firebase credential with the Google ID token.
-      var credential = firebase.auth.GoogleAuthProvider.credential(
-          googleUser.getAuthResponse().id_token);
+function onSignIn(googleUser) {
+        // Useful data for your client-side scripts:
+        var provider = new firebase.auth.GoogleAuthProvider();
+        firebase.auth()
+  .signInWithPopup(provider)
+  .then((result) => {
+    /** @type {firebase.auth.OAuthCredential} */
+    var credential = result.credential;
 
-      // Sign in with credential from the Google user.
-      firebase.auth().signInWithCredential(credential).catch((error) => {
-        // Handle Errors here.
-        var errorCode = error.code;
-        var errorMessage = error.message;
-        // The email of the user's account used.
-        var email = error.email;
-        // The firebase.auth.AuthCredential type that was used.
-        var credential = error.credential;
-        // ...
-      });
-    } else {
-      console.log('User already signed-in Firebase.');
-    }
+    // This gives you a Google Access Token. You can use it to access the Google API.
+    var token = credential.accessToken;
+    // The signed-in user info.
+    var user = result.user;
+    const firebaseConfig = {
+    apiKey: "AIzaSyDYNIFVoYIShkDQ_3HEgeFhsolI3795ieI",
+    authDomain: "fact-website.firebaseapp.com",
+    databaseURL: "https://fact-website-default-rtdb.asia-southeast1.firebasedatabase.app",
+    projectId: "fact-website",
+    storageBucket: "fact-website.appspot.com",
+    messagingSenderId: "173313139104",
+    appId: "1:173313139104:web:24440cb058ad0fbacfc4c5"
+  };
+  const app = initializeApp(firebaseConfig);
+  var database = firebase.database();
+
+  firebase.database().ref('/users/' + result.user.uid).set({
+    gmail: result.user.email,
+    profile_picture: result.additionalUserInfo.profile.picture,
+    locale: result.additionalUserInfo.profile.locale,
+    first_name: result.additionalUserInfo.profile.given_name,
+    last_name: result.additionalUserInfo.profile.family_name,
   });
+  }).catch((error) => {
+    // Handle Errors here.
+    var errorCode = error.code;
+    var errorMessage = error.message;
+    // The email of the user's account used.
+    var email = error.email;
+    // The firebase.auth.AuthCredential type that was used.
+    var credential = error.credential;
+  });
+
 }
+
+function change() {
+        // The ID token you need to pass to your backend:
+  firebase.database().ref('users/' + uid).set({
+    username: "soham",
+    email: "wdwfd",
+  });
+
+}
+
     </script>
   </body>
 </html>
